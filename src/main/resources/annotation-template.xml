@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<annotation>
+    <folder>{{ folder }}</folder>
+    <filename>{{ fileName }}</filename>
+    <size>
+        <depth>3</depth>
+        <width>{{ width }}</width>
+        <height>{{ height }}</height>
+    </size>
+    {{ objects }}
+</annotation>

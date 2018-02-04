@@ -1,0 +1,9 @@
+<object>
+    <name>{{ className }}</name>
+    <bndbox>
+        <xmin>{{ xMin }}</xmin>
+        <ymin>{{ yMin }}</ymin>
+        <xmax>{{ xMax }}</xmax>
+        <ymax>{{ yMax }}</ymax>
+    </bndbox>
+</object>

@@ -38,4 +38,13 @@ public class ImageUtil {
             LOG.error("Unagle to save image {}!", target);
         }
     }
+
+    public static BufferedImage cloneImage(final BufferedImage background) {
+        BufferedImage clone = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
+        Graphics2D cloneGraphics = (Graphics2D) clone.getGraphics();
+        cloneGraphics.drawImage(background, 0, 0, null);
+        cloneGraphics.dispose();
+        return clone;
+    }
+
 }
