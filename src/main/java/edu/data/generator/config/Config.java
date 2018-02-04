@@ -1,9 +1,9 @@
 package edu.data.generator.config;
 
 public interface Config {
-    String SOURCE_DIR = "../SetCards/TestInput";
-    String BACKGROUND_DIR = "../SetCards/Backgrounds";
-    String TARGET_DIR = "../SetCards/Out";
+    String SOURCE_DIR = "./dataset/cards";
+    String BACKGROUND_DIR = "./dataset/backgrounds";
+    String TARGET_DIR = "./dataset/output";
     Integer IMAGE_WIDTH = 416;
     Integer IMAGE_HEIGHT = 416;
     Integer ROWS = 4;
