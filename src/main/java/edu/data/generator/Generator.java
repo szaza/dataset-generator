@@ -18,14 +18,22 @@ public class Generator {
         backgroundGenerator = new BackgroundGenerator();
         cardGenerator = new CardGenerator();
         createOutputDir();
+        init();
     }
 
     public void generate() {
+        LOG.info("Image generation process has started.");
         for (int i=0; i<Config.DATA_SET_SIZE; i++) {
             BufferedImage image = backgroundGenerator.getRandomBackground();
             image = cardGenerator.putCardsToBackground(image);
             ImageUtil.saveImage(image, Config.TARGET_DIR + "/generated-" + i);
         }
+        LOG.info("Image generation process has finished.");
+    }
+
+    private void init() {
+        backgroundGenerator.init();
+        cardGenerator.init();
     }
 
     private void createOutputDir() {
