@@ -29,7 +29,7 @@ public class Generator {
         for (int i=0; i<Config.DATA_SET_SIZE; i++) {
             BufferedImage image = backgroundGenerator.getRandomBackground();
             GeneratedData data = cardGenerator.putCardsToBackground(image);
-            ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + "/Images/" + i);
+            ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + "/Images/" + i + ".jpg");
             annotationGenerator.saveAnnotation(data.getBoxes(), i + "");
 
         }

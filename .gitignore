@@ -35,4 +35,5 @@ build/
 bin/
 log/
 out/
-dataset/
+dataset/cards/
+dataset/backgrounds/

@@ -2,8 +2,11 @@ group 'edu.dataset.generator'
 version '1.0.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
+
+mainClassName = "edu.data.generator.Main"
 
 repositories {
     mavenCentral()
