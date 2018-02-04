@@ -6,6 +6,7 @@ import edu.data.generator.util.Reader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -33,7 +34,15 @@ public class BackgroundGenerator {
         if (!initialized) {
             init();
         }
-        return backgrounds.get(random.nextInt(backgrounds.size()));
+        return cloneBackground(backgrounds.get(random.nextInt(backgrounds.size())));
+    }
+
+    private BufferedImage cloneBackground(final BufferedImage background) {
+        BufferedImage clone = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
+        Graphics2D cloneGraphics = (Graphics2D) clone.getGraphics();
+        cloneGraphics.drawImage(background, 0, 0, null);
+        cloneGraphics.dispose();
+        return clone;
     }
 
     private void readBackgrounds() {

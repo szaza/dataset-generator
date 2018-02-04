@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import static edu.data.generator.config.Config.IMAGE_HEIGHT;
 import static edu.data.generator.config.Config.IMAGE_WIDTH;
 import static edu.data.generator.config.Config.MARGIN_AROUND;
 import static edu.data.generator.config.Config.MARGIN_BETWEEN;
+import static edu.data.generator.config.Config.MAX_ANGLE_TO_ROTATE;
 import static edu.data.generator.config.Config.ROWS;
 
 public class CardGenerator {
@@ -49,18 +51,30 @@ public class CardGenerator {
         int offset = (int) cardSize + MARGIN_BETWEEN;
         Graphics2D graphics = (Graphics2D) image.getGraphics();
 
-        int baseOffsetX = (int) (IMAGE_WIDTH - (COLS * cardSize + (COLS-1) * MARGIN_BETWEEN) + cardSize - cards.get(0).getWidth()) / 2;
-        int baseOffsetY = (int) (IMAGE_HEIGHT - (ROWS * cardSize + (ROWS-1) * MARGIN_BETWEEN) + cardSize - cards.get(0).getHeight()) / 2;
+        int baseOffsetX = (int) (IMAGE_WIDTH - (COLS * cardSize + (COLS - 1) * MARGIN_BETWEEN) - cards.get(0).getWidth()) / 2;
+        int baseOffsetY = (int) (IMAGE_HEIGHT - (ROWS * cardSize + (ROWS - 1) * MARGIN_BETWEEN)- cards.get(0).getHeight()) / 2;
 
         for (int y=0; y<ROWS; y++) {
             for (int x=0; x<COLS; x++) {
-                graphics.drawImage(cards.get(index), baseOffsetX + x * offset, baseOffsetY + y * offset, null);
+                BufferedImage rotatedCard = rotateCard(cards.get(index));
+                graphics.drawImage(rotatedCard, baseOffsetX + x * offset, baseOffsetY + y * offset, null);
                 index++;
             }
         }
 
         graphics.dispose();
         return image;
+    }
+
+    private BufferedImage rotateCard(final BufferedImage card) {
+        AffineTransform transform = new AffineTransform();
+        transform.rotate(Math.toRadians(random.nextInt(2 * MAX_ANGLE_TO_ROTATE) - MAX_ANGLE_TO_ROTATE));
+        transform.translate(cardSize - card.getWidth() / 2, cardSize - card.getHeight() / 2);
+        BufferedImage rotatedCard = new BufferedImage((int) (2 *cardSize), (int) (2 * cardSize), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D rotatedCardGraphics = (Graphics2D) rotatedCard.getGraphics();
+        rotatedCardGraphics.drawImage(card, transform, null);
+        rotatedCardGraphics.dispose();
+        return rotatedCard;
     }
 
     private List<BufferedImage> getRandomCards() {
