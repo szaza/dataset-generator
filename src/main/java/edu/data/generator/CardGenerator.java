@@ -56,8 +56,13 @@ public class CardGenerator {
 
         for (int y=0; y<ROWS; y++) {
             for (int x=0; x<COLS; x++) {
-                BufferedImage rotatedCard = rotateCard(cards.get(index));
+                int angle = random.nextInt(2 * MAX_ANGLE_TO_ROTATE) - MAX_ANGLE_TO_ROTATE;
+                BufferedImage rotatedCard = rotateCard(cards.get(index), angle);
                 graphics.drawImage(rotatedCard, baseOffsetX + x * offset, baseOffsetY + y * offset, null);
+                graphics.setColor(Color.GREEN);
+                graphics.drawRect((int) (baseOffsetX + x * offset + cardSize / 2 - Math.sin(Math.toRadians(angle)) * cardSize),
+                        (int) (baseOffsetY + y * offset + cardSize/2 + Math.sin(Math.toRadians(angle)) * cardSize),
+                        (int) cardSize, (int) cardSize);
                 index++;
             }
         }
@@ -66,9 +71,9 @@ public class CardGenerator {
         return image;
     }
 
-    private BufferedImage rotateCard(final BufferedImage card) {
+    private BufferedImage rotateCard(final BufferedImage card, final Integer angle) {
         AffineTransform transform = new AffineTransform();
-        transform.rotate(Math.toRadians(random.nextInt(2 * MAX_ANGLE_TO_ROTATE) - MAX_ANGLE_TO_ROTATE));
+        transform.rotate(Math.toRadians(angle));
         transform.translate(cardSize - card.getWidth() / 2, cardSize - card.getHeight() / 2);
         BufferedImage rotatedCard = new BufferedImage((int) (2 *cardSize), (int) (2 * cardSize), BufferedImage.TYPE_INT_ARGB);
         Graphics2D rotatedCardGraphics = (Graphics2D) rotatedCard.getGraphics();
