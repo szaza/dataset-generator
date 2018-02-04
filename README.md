@@ -28,6 +28,12 @@ There are some configuration possibilities. Unfortunately, I didn't create any p
     Integer MAX_ANGLE_TO_ROTATE = 15; // The maximum rotation angle of the cards
     boolean DEBUG = true; // You are able to draw the bounding boxes to the cards
 
+### Demo dataset
+In order to try it out you can download some demo data from the following links:
+- [Backgrounds](https://drive.google.com/open?id=1k2tQTgyuAuCpzkEq3tqSDhjpsKTfDn_z)
+- [Cards](https://drive.google.com/open?id=1adU-sSAeNNnd7fKqPAhasQdN56FxYI-d)
+
+Save and extract them respectively under the `dataset/backgrounds`, `dataset/cards`.
 
 ### Installation
 Verys simple to install and run the project, just run the following commands from command propmt:
