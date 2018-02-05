@@ -34,10 +34,19 @@ public class AnnotationGenerator {
 
         try {
             String template = Resources.toString(Resources.getResource("annotation-template.xml"), Charsets.UTF_8);
-            writeToFile(jinjava.render(template, context), fileName);
+            writeToFile(jinjava.render(template, context), Config.TARGET_DIR + "/Annotations/" + fileName + ".xml");
         } catch (IOException ex) {
             LOG.error("Unable to save annotation xml!");
         }
+    }
+
+    public void generateLabels(final List<String> classNames) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String className : classNames) {
+            stringBuilder.append(className);
+            stringBuilder.append(System.getProperty("line.separator"));
+        }
+        writeToFile(stringBuilder.toString(), Config.TARGET_DIR + "/labels.txt");
     }
 
     private String generateObjects(final List<BoundingBox> boxes) {
@@ -64,7 +73,7 @@ public class AnnotationGenerator {
     private void writeToFile(final String content, final String fileName) {
         try {
             BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(Config.TARGET_DIR + "/Annotations/" + fileName + ".xml"));
+                    new FileWriter(fileName));
             writer.write(content);
             writer.close();
         } catch (IOException ex) {

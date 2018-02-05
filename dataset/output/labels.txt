@@ -1,0 +1,14 @@
+one-green-blank-croissant
+one-green-blank-diamond
+one-green-filled-croissant
+one-green-filled-diamond
+one-green-filled-oval
+one-green-striped-croissant
+one-green-striped-diamond
+one-green-striped-oval
+one-purple-blank-corissant
+one-purple-blank-diamond
+one-purple-blank-oval
+one-purple-filled-croissant
+one-purple-filled-diamond
+one-purple-filled-oval

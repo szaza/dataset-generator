@@ -51,6 +51,10 @@ public class CardGenerator {
         return copyCardsToBackground(getRandomCards(), image);
     }
 
+    public List<String> getClassNames() {
+        return classNames;
+    }
+
     private GeneratedData copyCardsToBackground(final List<Integer> cardIndexes, BufferedImage image) {
         int index= 0;
         int offset = (int) cardSize + MARGIN_BETWEEN;

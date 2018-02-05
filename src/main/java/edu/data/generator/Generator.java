@@ -31,8 +31,10 @@ public class Generator {
             GeneratedData data = cardGenerator.putCardsToBackground(image);
             ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + "/Images/" + i + ".jpg");
             annotationGenerator.saveAnnotation(data.getBoxes(), i + "");
-
         }
+
+        annotationGenerator.generateLabels(cardGenerator.getClassNames());
+
         LOG.info("Image generation process has finished.");
     }
 
