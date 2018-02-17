@@ -122,7 +122,13 @@ public class CardGenerator {
         int newWidth = (int) (card.getWidth() + Math.abs(offsetX));
         int newHeight = (int) (card.getHeight() + Math.abs(offsetY));
 
-        BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        // Rescale the card
+        float largestSide = Math.max(newWidth, newHeight);
+        double proportion = (cardSize + Math.abs(Math.sin(angle) * cardSize)) / largestSide;
+        int rescaledWidth = (int) (newWidth * proportion);
+        int rescaledHeight = (int) (newHeight * proportion);
+
+        BufferedImage rotatedImage = new BufferedImage(rescaledWidth, rescaledHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D rotatedCardGraphics = (Graphics2D) rotatedImage.getGraphics();
 
         if (Config.BLUR) {
@@ -131,13 +137,7 @@ public class CardGenerator {
         rotatedCardGraphics.drawImage(card, transform, null);
         rotatedCardGraphics.dispose();
 
-        // Rescale the card
-        float largestSide = Math.max(newWidth, newHeight);
-        double proportion = (cardSize + Math.abs(Math.sin(angle) * cardSize)) / largestSide;
-        int rescaledWidth = (int) (newWidth * proportion);
-        int rescaledHeight = (int) (newHeight * proportion);
-
-        return ImageUtil.scaleImage(rotatedImage, rescaledWidth, rescaledHeight);
+        return rotatedImage;
     }
 
     private List<Integer> getRandomCards() {
@@ -153,7 +153,11 @@ public class CardGenerator {
         LOG.info("Loading, please wait. This process can take some time...");
         for (File file : Reader.listFilesFromDir(Config.SOURCE_DIR)) {
             BufferedImage image = ImageUtil.readImage(file);
-            images.add(image);
+            float largestSide = Math.max(image.getWidth(), image.getHeight());
+            float proportion = cardSize / largestSide;
+            int newWidth = (int) (image.getWidth() * proportion);
+            int newHeight = (int) (image.getHeight() * proportion);
+            images.add(ImageUtil.scaleImage(image, newWidth, newHeight));
             classNames.add(getClassName(file.getName()));
             LOG.info("{} loaded.", file.getName());
         }
