@@ -17,6 +17,9 @@ public class ImageUtil {
     public static BufferedImage scaleImage(final BufferedImage originalImage, final Integer width, final Integer height) {
         BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
         Graphics2D graphics = resizedImage.createGraphics();
+        if (Config.BLUR) {
+            graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        }
         graphics.drawImage(originalImage, 0, 0, width, height, null);
         graphics.dispose();
         return resizedImage;
@@ -42,6 +45,11 @@ public class ImageUtil {
     public static BufferedImage cloneImage(final BufferedImage background) {
         BufferedImage clone = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
         Graphics2D cloneGraphics = (Graphics2D) clone.getGraphics();
+
+        if (Config.BLUR) {
+            cloneGraphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        }
+
         cloneGraphics.drawImage(background, 0, 0, null);
         cloneGraphics.dispose();
         return clone;

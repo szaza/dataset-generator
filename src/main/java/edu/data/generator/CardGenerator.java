@@ -61,22 +61,27 @@ public class CardGenerator {
         Graphics2D graphics = (Graphics2D) image.getGraphics();
         List<BoundingBox> boxes = new ArrayList();
 
-        int baseOffsetX = (int) (IMAGE_WIDTH - (COLS * cardSize + (COLS - 1) * MARGIN_BETWEEN) - images.get(0).getWidth()) / 2;
-        int baseOffsetY = (int) (IMAGE_HEIGHT - (ROWS * cardSize + (ROWS - 1) * MARGIN_BETWEEN)- images.get(0).getHeight()) / 2;
+        int baseOffsetX = (int) (IMAGE_WIDTH - (COLS * cardSize + (COLS - 1) * MARGIN_BETWEEN)) / 2;
+        int baseOffsetY = (int) (IMAGE_HEIGHT - (ROWS * cardSize + (ROWS - 1) * MARGIN_BETWEEN)) / 2;
 
         for (int y=0; y<ROWS; y++) {
             for (int x=0; x<COLS; x++) {
+
                 int angle = random.nextInt(2 * MAX_ANGLE_TO_ROTATE) - MAX_ANGLE_TO_ROTATE;
+                int cardIndex = cardIndexes.get(index);
+                BufferedImage rotatedCard = rotateCard(ImageUtil.cloneImage(images.get(cardIndex)), Math.toRadians(angle));
+
                 int posX = baseOffsetX + x * offset;
                 int posY = baseOffsetY + y * offset;
-                int cardIndex = cardIndexes.get(index);
 
-                BufferedImage rotatedCard = rotateCard(ImageUtil.cloneImage(images.get(cardIndex)), angle);
+                if (Config.BLUR) {
+                    graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                }
                 graphics.drawImage(rotatedCard, posX, posY, null);
-                BoundingBox bBox = createBoundingBox(posX, posY, angle, cardIndex);
+                BoundingBox bBox = createBoundingBox(posX, posY, rotatedCard.getWidth(), rotatedCard.getHeight(), cardIndex);
 
                 if (DEBUG) {
-                    showBoundingBoxes(graphics, bBox.getxMin(), bBox.getyMin(), cardIndex);
+                    showBoundingBoxes(graphics, bBox, cardIndex);
                 }
 
                 boxes.add(bBox);
@@ -88,33 +93,51 @@ public class CardGenerator {
         return new GeneratedData(image, boxes);
     }
 
-    private BoundingBox createBoundingBox(final int posX, final int posY, final int angle, final int index) {
+    private BoundingBox createBoundingBox(final int posX, final int posY, final int width, final int height, final int index) {
         BoundingBox bBox = new BoundingBox();
-        int bBoxX = (int) (posX + cardSize / 2 - Math.sin(Math.toRadians(angle)) * cardSize);
-        int bBoxY = (int) (posY + cardSize/2 + Math.sin(Math.toRadians(angle)) * cardSize);
-        bBox.setxMin(bBoxX);
-        bBox.setyMin(bBoxY);
-        bBox.setxMax((int) (bBoxX + cardSize));
-        bBox.setyMax((int) (bBoxY + cardSize));
+        bBox.setxMin(posX);
+        bBox.setyMin(posY);
+        bBox.setxMax(posX + width);
+        bBox.setyMax(posY + height);
         bBox.setClassName(classNames.get(index));
         return bBox;
     }
 
-    private void showBoundingBoxes(final Graphics2D graphics, int x, int y, int index) {
+    private void showBoundingBoxes(final Graphics2D graphics, final BoundingBox bBox, int index) {
         graphics.setColor(Color.GREEN);
-        graphics.drawRect(x, y, (int) cardSize, (int) cardSize);
-        graphics.drawString(classNames.get(index), x, y - 5);
+        graphics.drawRect(bBox.getxMin(), bBox.getyMin(), bBox.getxMax() - bBox.getxMin(), bBox.getyMax() - bBox.getyMin());
+        graphics.drawString(classNames.get(index), bBox.getxMin(), bBox.getyMin() - 5);
     }
 
-    private BufferedImage rotateCard(final BufferedImage card, final Integer angle) {
+    private BufferedImage rotateCard(final BufferedImage card, final Double angle) {
+        // Rotate the card
         AffineTransform transform = new AffineTransform();
-        transform.rotate(Math.toRadians(angle));
-        transform.translate(cardSize - card.getWidth() / 2, cardSize - card.getHeight() / 2);
-        BufferedImage rotatedCard = new BufferedImage((int) (2 *cardSize), (int) (2 * cardSize), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D rotatedCardGraphics = (Graphics2D) rotatedCard.getGraphics();
+
+        Double offsetX = Math.sin(angle) * card.getHeight();
+        Double offsetY = Math.sin(angle) * card.getWidth();
+
+        transform.translate((offsetX > 0) ? offsetX : 0, (offsetY < 0) ? - offsetY : 0);
+        transform.rotate(angle);
+
+        int newWidth = (int) (card.getWidth() + Math.abs(offsetX));
+        int newHeight = (int) (card.getHeight() + Math.abs(offsetY));
+
+        BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D rotatedCardGraphics = (Graphics2D) rotatedImage.getGraphics();
+
+        if (Config.BLUR) {
+            rotatedCardGraphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        }
         rotatedCardGraphics.drawImage(card, transform, null);
         rotatedCardGraphics.dispose();
-        return rotatedCard;
+
+        // Rescale the card
+        float largestSide = Math.max(newWidth, newHeight);
+        double proportion = (cardSize + Math.abs(Math.sin(angle) * cardSize)) / largestSide;
+        int rescaledWidth = (int) (newWidth * proportion);
+        int rescaledHeight = (int) (newHeight * proportion);
+
+        return ImageUtil.scaleImage(rotatedImage, rescaledWidth, rescaledHeight);
     }
 
     private List<Integer> getRandomCards() {
@@ -130,11 +153,7 @@ public class CardGenerator {
         LOG.info("Loading and scaling images, please wait. This process can take some time...");
         for (File file : Reader.listFilesFromDir(Config.SOURCE_DIR)) {
             BufferedImage image = ImageUtil.readImage(file);
-            float largestSide = Math.max(image.getWidth(), image.getHeight());
-            float proportion = cardSize / largestSide;
-            int newWidth = (int) (image.getWidth() * proportion);
-            int newHeight = (int) (image.getHeight() * proportion);
-            images.add(ImageUtil.scaleImage(image, newWidth, newHeight));
+            images.add(image);
             classNames.add(getClassName(file.getName()));
             LOG.info("{} loaded and rescaled.", file.getName());
         }

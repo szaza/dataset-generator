@@ -8,100 +8,100 @@
         <height>416</height>
     </size>
     <object>
-    <name>two-red-filled-diamond</name>
+    <name>one-green-filled-oval</name>
     <bndbox>
-        <xmin>85</xmin>
-        <ymin>0</ymin>
-        <xmax>176</xmax>
-        <ymax>91</ymax>
+        <xmin>60</xmin>
+        <ymin>10</ymin>
+        <xmax>128</xmax>
+        <ymax>104</ymax>
     </bndbox>
 </object><object>
-    <name>one-red-striped-oval</name>
+    <name>one-purple-filled-oval</name>
     <bndbox>
-        <xmin>156</xmin>
-        <ymin>29</ymin>
-        <xmax>247</xmax>
-        <ymax>120</ymax>
+        <xmin>161</xmin>
+        <ymin>10</ymin>
+        <xmax>233</xmax>
+        <ymax>106</ymax>
     </bndbox>
 </object><object>
-    <name>two-purple-striped-croissant</name>
+    <name>one-purple-blank-corissant</name>
     <bndbox>
-        <xmin>279</xmin>
-        <ymin>7</ymin>
-        <xmax>370</xmax>
-        <ymax>98</ymax>
+        <xmin>262</xmin>
+        <ymin>10</ymin>
+        <xmax>351</xmax>
+        <ymax>122</ymax>
     </bndbox>
 </object><object>
-    <name>one-green-blank-diamond</name>
+    <name>one-green-striped-croissant</name>
     <bndbox>
-        <xmin>69</xmin>
-        <ymin>116</ymin>
-        <xmax>160</xmax>
-        <ymax>207</ymax>
+        <xmin>60</xmin>
+        <ymin>111</ymin>
+        <xmax>139</xmax>
+        <ymax>215</ymax>
+    </bndbox>
+</object><object>
+    <name>one-green-filled-diamond</name>
+    <bndbox>
+        <xmin>161</xmin>
+        <ymin>111</ymin>
+        <xmax>232</xmax>
+        <ymax>208</ymax>
+    </bndbox>
+</object><object>
+    <name>one-green-filled-croissant</name>
+    <bndbox>
+        <xmin>262</xmin>
+        <ymin>111</ymin>
+        <xmax>329</xmax>
+        <ymax>204</ymax>
     </bndbox>
 </object><object>
     <name>one-green-blank-croissant</name>
     <bndbox>
-        <xmin>164</xmin>
-        <ymin>122</ymin>
-        <xmax>255</xmax>
-        <ymax>213</ymax>
+        <xmin>60</xmin>
+        <ymin>212</ymin>
+        <xmax>149</xmax>
+        <ymax>324</ymax>
     </bndbox>
 </object><object>
-    <name>one-red-filled-diamond</name>
+    <name>one-green-filled-diamond</name>
     <bndbox>
-        <xmin>300</xmin>
-        <ymin>88</ymin>
-        <xmax>391</xmax>
-        <ymax>179</ymax>
-    </bndbox>
-</object><object>
-    <name>two-red-filled-croissant</name>
-    <bndbox>
-        <xmin>62</xmin>
-        <ymin>225</ymin>
-        <xmax>153</xmax>
+        <xmin>161</xmin>
+        <ymin>212</ymin>
+        <xmax>240</xmax>
         <ymax>316</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-striped-diamond</name>
+    <name>one-purple-blank-diamond</name>
+    <bndbox>
+        <xmin>262</xmin>
+        <ymin>212</ymin>
+        <xmax>344</xmax>
+        <ymax>317</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-filled-oval</name>
+    <bndbox>
+        <xmin>60</xmin>
+        <ymin>313</ymin>
+        <xmax>130</xmax>
+        <ymax>407</ymax>
+    </bndbox>
+</object><object>
+    <name>one-green-striped-oval</name>
     <bndbox>
         <xmin>161</xmin>
-        <ymin>227</ymin>
-        <xmax>252</xmax>
-        <ymax>318</ymax>
-    </bndbox>
-</object><object>
-    <name>one-red-striped-diamond</name>
-    <bndbox>
-        <xmin>283</xmin>
-        <ymin>206</ymin>
-        <xmax>374</xmax>
-        <ymax>297</ymax>
-    </bndbox>
-</object><object>
-    <name>two-green-striped-oval</name>
-    <bndbox>
-        <xmin>96</xmin>
-        <ymin>291</ymin>
-        <xmax>187</xmax>
-        <ymax>382</ymax>
-    </bndbox>
-</object><object>
-    <name>three-green-filled-oval</name>
-    <bndbox>
-        <xmin>166</xmin>
-        <ymin>323</ymin>
-        <xmax>257</xmax>
-        <ymax>414</ymax>
-    </bndbox>
-</object><object>
-    <name>two-green-filled-croissant</name>
-    <bndbox>
-        <xmin>276</xmin>
         <ymin>313</ymin>
-        <xmax>367</xmax>
-        <ymax>404</ymax>
+        <xmax>236</xmax>
+        <ymax>415</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-filled-croissant</name>
+    <bndbox>
+        <xmin>262</xmin>
+        <ymin>313</ymin>
+        <xmax>341</xmax>
+        <ymax>417</ymax>
     </bndbox>
 </object>
 </annotation>

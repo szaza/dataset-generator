@@ -12,5 +12,6 @@ public interface Config {
     Integer MARGIN_AROUND = 10; // 10px space around the playground
     Integer MARGIN_BETWEEN = 10; // 10px space between the cards
     Integer MAX_ANGLE_TO_ROTATE = 15;
+    boolean BLUR = true;
     boolean DEBUG = true;
 }
