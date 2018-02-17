@@ -150,12 +150,12 @@ public class CardGenerator {
 
     private void readImages() {
         cardSize = calcCardSize();
-        LOG.info("Loading and scaling images, please wait. This process can take some time...");
+        LOG.info("Loading, please wait. This process can take some time...");
         for (File file : Reader.listFilesFromDir(Config.SOURCE_DIR)) {
             BufferedImage image = ImageUtil.readImage(file);
             images.add(image);
             classNames.add(getClassName(file.getName()));
-            LOG.info("{} loaded and rescaled.", file.getName());
+            LOG.info("{} loaded.", file.getName());
         }
         LOG.info("{} images to process.", images.size());
     }
