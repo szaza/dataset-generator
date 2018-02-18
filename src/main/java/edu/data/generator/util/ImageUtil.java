@@ -12,16 +12,21 @@ import java.io.IOException;
 
 public class ImageUtil {
 
+    private final static Double proportion = 0.75d;
     private final static Logger LOG = LoggerFactory.getLogger(ImageUtil.class);
 
-    public static BufferedImage scaleImage(final BufferedImage originalImage, final Integer width, final Integer height) {
-        BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
-        Graphics2D graphics = resizedImage.createGraphics();
-        if (Config.BLUR) {
-            graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    public static BufferedImage progressiveScaleImage(final BufferedImage originalImage, final Integer width, final Integer height) {
+        BufferedImage resizedImage = cloneImage(originalImage);
+        int newWidth = (int) ((double) originalImage.getWidth() * proportion);
+        int newHeight = (int) ((double) originalImage.getHeight() * proportion);
+
+        while (newWidth > width || newHeight > height) {
+            resizedImage = scaleImage(resizedImage, newWidth, newHeight);
+            newWidth = (int) ((double) newWidth * proportion);
+            newHeight = (int) ((double) newHeight * proportion);
         }
-        graphics.drawImage(originalImage, 0, 0, width, height, null);
-        graphics.dispose();
+
+        resizedImage = scaleImage(resizedImage, width, height);
         return resizedImage;
     }
 
@@ -53,6 +58,23 @@ public class ImageUtil {
         cloneGraphics.drawImage(background, 0, 0, null);
         cloneGraphics.dispose();
         return clone;
+    }
+
+    private static BufferedImage scaleImage(final BufferedImage originalImage, final Integer width, final Integer height) {
+        BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
+
+        Graphics2D graphics = resizedImage.createGraphics();
+        if (Config.BLUR) {
+            graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+            graphics.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+            graphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+            graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        }
+        graphics.drawImage(originalImage, 0, 0, width, height, null);
+        graphics.dispose();
+        return resizedImage;
     }
 
 }

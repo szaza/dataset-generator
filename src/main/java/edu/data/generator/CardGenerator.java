@@ -128,7 +128,7 @@ public class CardGenerator {
         int rescaledWidth = (int) (newWidth * proportion);
         int rescaledHeight = (int) (newHeight * proportion);
 
-        BufferedImage rotatedImage = new BufferedImage(rescaledWidth, rescaledHeight, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage rotatedImage = new BufferedImage(rescaledWidth, rescaledHeight, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D rotatedCardGraphics = (Graphics2D) rotatedImage.getGraphics();
 
         if (Config.BLUR) {
@@ -157,7 +157,7 @@ public class CardGenerator {
             float proportion = cardSize / largestSide;
             int newWidth = (int) (image.getWidth() * proportion);
             int newHeight = (int) (image.getHeight() * proportion);
-            images.add(ImageUtil.scaleImage(image, newWidth, newHeight));
+            images.add(ImageUtil.progressiveScaleImage(image, newWidth, newHeight));
             classNames.add(getClassName(file.getName()));
             LOG.info("{} loaded.", file.getName());
         }

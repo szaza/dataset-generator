@@ -39,7 +39,7 @@ public class BackgroundGenerator {
     private void readBackgrounds() {
         LOG.info("Loading and scaling backgrounds, please wait. This process can take some time...");
         for (File file : Reader.listFilesFromDir(Config.BACKGROUND_DIR)){
-            backgrounds.add(ImageUtil.scaleImage(ImageUtil.readImage(file),
+            backgrounds.add(ImageUtil.progressiveScaleImage(ImageUtil.readImage(file),
                     Config.IMAGE_WIDTH, Config.IMAGE_HEIGHT));
             LOG.info("Background {} loaded and rescaled.", file.getName());
         }
