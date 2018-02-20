@@ -9,9 +9,11 @@ public interface Config {
     Integer ROWS = 4;
     Integer COLS = 3;
     Integer DATA_SET_SIZE = 5;
+    Integer VAL_SET_SIZE = 5;
     Integer MARGIN_AROUND = 10; // 10px space around the playground
     Integer MARGIN_BETWEEN = 10; // 10px space between the cards
     Integer MAX_ANGLE_TO_ROTATE = 15;
     boolean BLUR = true;
     boolean DEBUG = true;
+    boolean DARKNET = true; // Generates labels and train-val.txt for darknet
 }

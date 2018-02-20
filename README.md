@@ -1,7 +1,10 @@
-# Pascal VOC style dataset generator for Machine Learning projects
+# Dataset generator for Machine Learning projects
+## It supports the VOC and Darknet style datasets
 It is a very simple program to generate Pascal VOC style learning dataset from images. It generates images and XML style annotations with bounding box coordinates.
 
-I've created this tool because I was needed to generate a large set of data for my machine learning project. I wanted to train a YOLO model with game cards. In my case I had to create some learning playgrounds like this one:
+### Motivation
+
+I've created this tool because I was needed to generate a large set of data for my machine learning project. I wanted to train a YOLO model with SET game cards. In my case I had to create some learning data like this one:
 
 <img src="https://github.com/szaza/dataset-generator/blob/master/dataset/original/0005.jpg" alt="Set card grid" title="Generated playground" width="300">
 
@@ -23,10 +26,20 @@ There are some configuration possibilities. Unfortunately, I didn't create any p
     Integer ROWS = 4; // How many rows you need to generate
     Integer COLS = 3; // How many columns you need
     Integer DATA_SET_SIZE = 5; // How many data should be generated
+    Integer VAL_SET_SIZE = 5; // How many validation data should be generated (it generates only the val.txt)
     Integer MARGIN_AROUND = 10; // 10px space around the playground
     Integer MARGIN_BETWEEN = 10; // 10px space between the cards
     Integer MAX_ANGLE_TO_ROTATE = 15; // The maximum rotation angle of the cards
+    boolean BLUR = true; // If it is true, it uses BICUBIC interpolation for each resize operation
     boolean DEBUG = true; // You are able to draw the bounding boxes to the cards
+    boolean DARKNET = true; // Generates labels and train-val.txt for darknet
+
+### Installation
+Verys simple to install and run the project, just run the following commands from command propmt:
+
+`./gradlew clean build -xtest` - it builds the project
+
+`./gradlew run` - to run the project
 
 ### Demo dataset
 In order to try it out you can download some demo data from the following links:
@@ -35,9 +48,20 @@ In order to try it out you can download some demo data from the following links:
 
 Save and extract them respectively under the `dataset/backgrounds`, `dataset/cards`.
 
-### Installation
-Verys simple to install and run the project, just run the following commands from command propmt:
+### Output
+For **DARKFLOW:**
 
-`./gradlew clean build -xtest` - it builds the project
-
-`./gradlew run` - to run the project
+* **output/**
+  * **Annotations/** - contains the xml style annotations
+  * **Images/** - it contains the generated images
+  * **labels.txt** - label file needed to darkflow
+  
+For **DARKNET** (It is only generated if DARKNET flag is set in the Config.java file):
+  * **output/**
+    * **Annotations/** - contains the xml style annotations
+    * **Images/** - it contains the generated images  
+    * **Annotations/labels/** - it generates the *.txt files for darknet
+    * **voc.names** - similar to the labels.txt. 
+    * **train.txt** - it contains the paths for the images
+    * **val.txt** - it contains the paths for the images
+    * **voc.data** - data file for darknet framework

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,7 +25,77 @@ public class AnnotationGenerator {
         jinjava = new Jinjava();
     }
 
-    public void saveAnnotation(final List<BoundingBox> boxes, final String fileName) {
+    public void saveAnnotation(final List<String> classNames, final List<BoundingBox> boxes, final String fileName) {
+        saveInVocFormat(boxes, fileName);
+        if (Config.DARKNET) {
+            saveInDarknetFormat(classNames, boxes, fileName);
+        }
+    }
+
+    public void generateLabels(final List<String> classNames) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String className : classNames) {
+            stringBuilder.append(className);
+            stringBuilder.append(System.getProperty("line.separator"));
+        }
+
+        if (Config.DARKNET) {
+            writeToFile(stringBuilder.toString(), Config.TARGET_DIR + "/labels.txt");
+            writeToFile(stringBuilder.toString(), Config.TARGET_DIR + "/voc.names");
+            createDataFile(classNames);
+            createDataSet("train.txt", Config.DATA_SET_SIZE);
+            createDataSet("val.txt", Config.VAL_SET_SIZE);
+        }
+    }
+
+    private void createDataFile(final List<String> classNames) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("classes = ");
+        sb.append(classNames.size());
+        sb.append(System.getProperty("line.separator"));
+        sb.append("train = ");
+        sb.append(new File(formatPath(Config.TARGET_DIR) + "/train.txt").getAbsolutePath());
+        sb.append(System.getProperty("line.separator"));
+        sb.append("valid = ");
+        sb.append(new File(formatPath(Config.TARGET_DIR) + "/val.txt").getAbsolutePath());
+        sb.append(System.getProperty("line.separator"));
+        sb.append("names = date/voc.names");
+        sb.append(System.getProperty("line.separator"));
+        sb.append("backup = backup");
+        writeToFile(sb.toString(), Config.TARGET_DIR + "/voc.data");
+    }
+
+    private void createDataSet(final String name, final Integer size) {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<size; i++) {
+            sb.append(new File(formatPath(Config.TARGET_DIR) + "/Images/" + i + ".jpg").getAbsolutePath());
+            sb.append(System.getProperty("line.separator"));
+        }
+        writeToFile(sb.toString(), Config.TARGET_DIR + "/" + name);
+    }
+
+    private String formatPath(final String path) {
+        return path.substring(2, path.length());
+    }
+
+    private void saveInDarknetFormat(final List<String> classNames, final List<BoundingBox> boxes, final String fileName) {
+        Map<String, Integer> map = getClassNamesMap(classNames);
+
+        StringBuilder sb = new StringBuilder();
+        for (BoundingBox bBox:boxes) {
+            sb.append(map.get(bBox.getClassName()));
+            sb.append(" ");
+            double [] bBoxCoords = convertToDarknetFormat(bBox);
+            for (double param : bBoxCoords) {
+                sb.append(param);
+                sb.append(" ");
+            }
+            sb.append(System.getProperty("line.separator"));
+        }
+        writeToFile(sb.toString(), Config.TARGET_DIR + "/Annotations/labels/" + fileName + ".txt");
+    }
+
+    private void saveInVocFormat(final List<BoundingBox> boxes, final String fileName) {
         Map<String, String> context = new HashMap();
         context.put("folder", "../Images");
         context.put("fileName", fileName + ".jpg");
@@ -38,15 +109,6 @@ public class AnnotationGenerator {
         } catch (IOException ex) {
             LOG.error("Unable to save annotation xml!");
         }
-    }
-
-    public void generateLabels(final List<String> classNames) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String className : classNames) {
-            stringBuilder.append(className);
-            stringBuilder.append(System.getProperty("line.separator"));
-        }
-        writeToFile(stringBuilder.toString(), Config.TARGET_DIR + "/labels.txt");
     }
 
     private String generateObjects(final List<BoundingBox> boxes) {
@@ -68,6 +130,28 @@ public class AnnotationGenerator {
         }
 
         return objects;
+    }
+
+    private Map<String, Integer> getClassNamesMap(final List<String> classNames) {
+        Map<String, Integer> map = new HashMap();
+        for (int i=0; i < classNames.size(); i++) {
+            map.put(classNames.get(i), i);
+        }
+        return map;
+    }
+
+    private double[] convertToDarknetFormat(final BoundingBox boundingBox) {
+        double dw = 1d / (double) Config.IMAGE_WIDTH;
+        double dh = 1d / (double) Config.IMAGE_HEIGHT;
+        double x = (double) (boundingBox.getxMin() + boundingBox.getxMax()) / 2d - 1d;
+        double y = (double) (boundingBox.getyMin() + boundingBox.getyMax()) / 2d - 1d;
+        double w = (double) (boundingBox.getxMax() - boundingBox.getxMin());
+        double h = (double) (boundingBox.getyMax() - boundingBox.getyMin());
+        x = x * dw;
+        w = w * dw;
+        y = y * dh;
+        h = h * dh;
+        return new double[]{x,y,w,h};
     }
 
     private void writeToFile(final String content, final String fileName) {

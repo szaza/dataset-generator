@@ -30,7 +30,7 @@ public class Generator {
             BufferedImage image = backgroundGenerator.getRandomBackground();
             GeneratedData data = cardGenerator.putCardsToBackground(image);
             ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + "/Images/" + i + ".jpg");
-            annotationGenerator.saveAnnotation(data.getBoxes(), i + "");
+            annotationGenerator.saveAnnotation(cardGenerator.getClassNames(), data.getBoxes(), i + "");
         }
 
         annotationGenerator.generateLabels(cardGenerator.getClassNames());
@@ -47,6 +47,10 @@ public class Generator {
         createDirIfNotExists(new File(Config.TARGET_DIR));
         createDirIfNotExists(new File(Config.TARGET_DIR + "/Images"));
         createDirIfNotExists(new File(Config.TARGET_DIR + "/Annotations"));
+
+        if (Config.DARKNET) {
+            createDirIfNotExists(new File(Config.TARGET_DIR + "/Annotations/labels"));
+        }
     }
 
     private void createDirIfNotExists(final File directory) {
