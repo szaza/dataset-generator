@@ -1,5 +1,0 @@
-/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/Images/0.jpg
-/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/Images/1.jpg
-/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/Images/2.jpg
-/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/Images/3.jpg
-/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/Images/4.jpg

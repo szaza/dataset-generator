@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <annotation>
-    <folder>../Images</folder>
-    <filename>4.jpg</filename>
+    <folder>../JPEGImages/</folder>
+    <filename>1.jpg</filename>
     <size>
         <depth>3</depth>
         <width>416</width>
@@ -12,96 +12,96 @@
     <bndbox>
         <xmin>60</xmin>
         <ymin>10</ymin>
-        <xmax>153</xmax>
-        <ymax>123</ymax>
+        <xmax>130</xmax>
+        <ymax>106</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-blank-diamond</name>
+    <bndbox>
+        <xmin>161</xmin>
+        <ymin>10</ymin>
+        <xmax>242</xmax>
+        <ymax>115</ymax>
+    </bndbox>
+</object><object>
+    <name>one-green-filled-diamond</name>
+    <bndbox>
+        <xmin>262</xmin>
+        <ymin>10</ymin>
+        <xmax>345</xmax>
+        <ymax>117</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-blank-diamond</name>
+    <bndbox>
+        <xmin>60</xmin>
+        <ymin>111</ymin>
+        <xmax>138</xmax>
+        <ymax>213</ymax>
     </bndbox>
 </object><object>
     <name>one-purple-filled-oval</name>
     <bndbox>
         <xmin>161</xmin>
-        <ymin>10</ymin>
+        <ymin>111</ymin>
         <xmax>255</xmax>
-        <ymax>123</ymax>
+        <ymax>224</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-blank-corissant</name>
-    <bndbox>
-        <xmin>262</xmin>
-        <ymin>10</ymin>
-        <xmax>350</xmax>
-        <ymax>122</ymax>
-    </bndbox>
-</object><object>
-    <name>one-green-filled-oval</name>
-    <bndbox>
-        <xmin>60</xmin>
-        <ymin>111</ymin>
-        <xmax>132</xmax>
-        <ymax>208</ymax>
-    </bndbox>
-</object><object>
-    <name>one-purple-filled-diamond</name>
-    <bndbox>
-        <xmin>161</xmin>
-        <ymin>111</ymin>
-        <xmax>232</xmax>
-        <ymax>208</ymax>
-    </bndbox>
-</object><object>
-    <name>one-purple-blank-diamond</name>
+    <name>one-green-filled-diamond</name>
     <bndbox>
         <xmin>262</xmin>
         <ymin>111</ymin>
-        <xmax>334</xmax>
-        <ymax>208</ymax>
+        <xmax>335</xmax>
+        <ymax>210</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-blank-oval</name>
+    <name>one-green-blank-diamond</name>
     <bndbox>
         <xmin>60</xmin>
         <ymin>212</ymin>
-        <xmax>138</xmax>
-        <ymax>314</ymax>
+        <xmax>147</xmax>
+        <ymax>322</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-filled-diamond</name>
+    <name>one-green-blank-croissant</name>
     <bndbox>
         <xmin>161</xmin>
         <ymin>212</ymin>
-        <xmax>252</xmax>
-        <ymax>325</ymax>
+        <xmax>225</xmax>
+        <ymax>305</ymax>
     </bndbox>
 </object><object>
-    <name>one-green-striped-croissant</name>
+    <name>one-purple-filled-croissant</name>
     <bndbox>
         <xmin>262</xmin>
         <ymin>212</ymin>
-        <xmax>338</xmax>
-        <ymax>313</ymax>
+        <xmax>346</xmax>
+        <ymax>320</ymax>
     </bndbox>
 </object><object>
     <name>one-green-filled-croissant</name>
     <bndbox>
         <xmin>60</xmin>
         <ymin>313</ymin>
-        <xmax>142</xmax>
-        <ymax>418</ymax>
+        <xmax>146</xmax>
+        <ymax>421</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-blank-oval</name>
+    <name>one-green-blank-diamond</name>
     <bndbox>
         <xmin>161</xmin>
         <ymin>313</ymin>
-        <xmax>253</xmax>
-        <ymax>426</ymax>
+        <xmax>229</xmax>
+        <ymax>407</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-blank-diamond</name>
+    <name>one-purple-filled-oval</name>
     <bndbox>
         <xmin>262</xmin>
         <ymin>313</ymin>
-        <xmax>335</xmax>
-        <ymax>412</ymax>
+        <xmax>340</xmax>
+        <ymax>414</ymax>
     </bndbox>
 </object>
 </annotation>

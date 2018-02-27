@@ -1,5 +1,0 @@
-classes = 14
-train = /home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/train.txt
-valid = /home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/val.txt
-names = data/voc.names
-backup = backup

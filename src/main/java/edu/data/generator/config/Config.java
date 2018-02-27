@@ -4,6 +4,12 @@ public interface Config {
     String SOURCE_DIR = "./dataset/cards";
     String BACKGROUND_DIR = "./dataset/backgrounds";
     String TARGET_DIR = "./dataset/output";
+    String DATASET_DIR = "/VOCDataSet/";
+    String IMAGES_DIR = "/JPEGImages/";
+    String ANNOTATIONS_DIR = "/Annotations/";
+    String DARKNET_LABELS = "/labels/";
+    String DARKNET_CONFIG_DIR = "/DarknetConf/";
+    String VOC_LABELS = "/VOCLabels/";
     Integer IMAGE_WIDTH = 416;
     Integer IMAGE_HEIGHT = 416;
     Integer ROWS = 4;

@@ -13,7 +13,7 @@ The current solution makes possible to generate similar learning data with annot
 
 You can find below some generated data:
 
-<img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/Images/0.jpg" alt="Generated playground" title="Generated playground" width="300"> <img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/Images/1.jpg" alt="Generated playground2" title="Generated playground2" width="300">
+<img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/VOCDataSet/JPEGImages/0.jpg" alt="Generated playground" title="Generated playground" width="300"> <img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/VOCDataSet/JPEGImages/1.jpg" alt="Generated playground2" title="Generated playground2" width="300">
 
 ### Configuration
 There are some configuration possibilities. Unfortunately, I didn't create any property file for these, so you have to set the parameters in the `Configuration.java` interface.
@@ -21,6 +21,12 @@ There are some configuration possibilities. Unfortunately, I didn't create any p
     String SOURCE_DIR = "./dataset/cards";
     String BACKGROUND_DIR = "./dataset/backgrounds";
     String TARGET_DIR = "./dataset/output";
+    String DATASET_DIR = "/VOCDataSet/";
+    String IMAGES_DIR = "/JPEGImages/";
+    String ANNOTATIONS_DIR = "/Annotations/";
+    String DARKNET_LABELS = "/labels/";
+    String DARKNET_CONFIG_DIR = "/DarknetConf/";
+    String VOC_LABELS = "/VocLabels/";    
     Integer IMAGE_WIDTH = 416;
     Integer IMAGE_HEIGHT = 416;
     Integer ROWS = 4; // How many rows you need to generate
@@ -49,19 +55,18 @@ In order to try it out you can download some demo data from the following links:
 Save and extract them respectively under the `dataset/backgrounds`, `dataset/cards`.
 
 ### Output
-For **DARKFLOW:**
-
 * **output/**
-  * **Annotations/** - contains the xml style annotations
-  * **Images/** - it contains the generated images
-  * **labels.txt** - label file needed to darkflow
-  
-For **DARKNET** (It is only generated if DARKNET flag is set in the Config.java file):
-  * **output/**
-    * **Annotations/** - contains the xml style annotations
-    * **Images/** - it contains the generated images  
-    * **Annotations/labels/** - it generates the *.txt files for darknet
+  * **DarknetConf/** - contains the darknet configuration files
     * **voc.names** - similar to the labels.txt. 
     * **train.txt** - it contains the paths for the images
     * **val.txt** - it contains the paths for the images
-    * **voc.data** - data file for darknet framework
+    * **voc.data** - data file for darknet framework  
+  * **VOCDataSet/** - contains the Pascal VOC dataset
+    * **Annotations/** - contains the xml style annotations
+    * **JPEGImages/** - it contains the generated images
+    * **labels/** - it generates the *.txt files for darknet
+  * **VOCLabels/**  
+    * **labels.txt** - label file needed to darkflow
+  
+
+

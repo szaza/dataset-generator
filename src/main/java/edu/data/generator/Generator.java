@@ -9,6 +9,13 @@ import org.slf4j.LoggerFactory;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import static edu.data.generator.config.Config.ANNOTATIONS_DIR;
+import static edu.data.generator.config.Config.DARKNET_CONFIG_DIR;
+import static edu.data.generator.config.Config.DARKNET_LABELS;
+import static edu.data.generator.config.Config.DATASET_DIR;
+import static edu.data.generator.config.Config.IMAGES_DIR;
+import static edu.data.generator.config.Config.VOC_LABELS;
+
 public class Generator {
 
     private final static Logger LOG = LoggerFactory.getLogger(Generator.class);
@@ -29,7 +36,7 @@ public class Generator {
         for (int i=0; i<Config.DATA_SET_SIZE; i++) {
             BufferedImage image = backgroundGenerator.getRandomBackground();
             GeneratedData data = cardGenerator.putCardsToBackground(image);
-            ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + "/Images/" + i + ".jpg");
+            ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + DATASET_DIR + IMAGES_DIR + i + ".jpg");
             annotationGenerator.saveAnnotation(cardGenerator.getClassNames(), data.getBoxes(), i + "");
         }
 
@@ -45,11 +52,14 @@ public class Generator {
 
     private void createOutputDir() {
         createDirIfNotExists(new File(Config.TARGET_DIR));
-        createDirIfNotExists(new File(Config.TARGET_DIR + "/Images"));
-        createDirIfNotExists(new File(Config.TARGET_DIR + "/Annotations"));
+        createDirIfNotExists(new File(Config.TARGET_DIR + DATASET_DIR));
+        createDirIfNotExists(new File(Config.TARGET_DIR + DATASET_DIR + IMAGES_DIR));
+        createDirIfNotExists(new File(Config.TARGET_DIR + DATASET_DIR + ANNOTATIONS_DIR));
+        createDirIfNotExists(new File(Config.TARGET_DIR + VOC_LABELS));
 
         if (Config.DARKNET) {
-            createDirIfNotExists(new File(Config.TARGET_DIR + "/labels"));
+            createDirIfNotExists(new File(Config.TARGET_DIR + DATASET_DIR + DARKNET_LABELS));
+            createDirIfNotExists(new File(Config.TARGET_DIR + DARKNET_CONFIG_DIR));
         }
     }
 

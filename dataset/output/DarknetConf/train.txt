@@ -1,0 +1,5 @@
+/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/VOCDataSet/JPEGImages/0.jpg
+/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/VOCDataSet/JPEGImages/1.jpg
+/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/VOCDataSet/JPEGImages/2.jpg
+/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/VOCDataSet/JPEGImages/3.jpg
+/home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/VOCDataSet/JPEGImages/4.jpg

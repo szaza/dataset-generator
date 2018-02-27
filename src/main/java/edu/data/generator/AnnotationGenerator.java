@@ -16,6 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static edu.data.generator.config.Config.ANNOTATIONS_DIR;
+import static edu.data.generator.config.Config.DARKNET_CONFIG_DIR;
+import static edu.data.generator.config.Config.DARKNET_LABELS;
+import static edu.data.generator.config.Config.DATASET_DIR;
+import static edu.data.generator.config.Config.IMAGES_DIR;
+import static edu.data.generator.config.Config.VOC_LABELS;
+
 public class AnnotationGenerator {
 
     private final static Logger LOG = LoggerFactory.getLogger(AnnotationGenerator.class);
@@ -39,9 +46,10 @@ public class AnnotationGenerator {
             stringBuilder.append(System.getProperty("line.separator"));
         }
 
+        writeToFile(stringBuilder.toString(), Config.TARGET_DIR + VOC_LABELS + "/labels.txt");
+
         if (Config.DARKNET) {
-            writeToFile(stringBuilder.toString(), Config.TARGET_DIR + "/labels.txt");
-            writeToFile(stringBuilder.toString(), Config.TARGET_DIR + "/voc.names");
+            writeToFile(stringBuilder.toString(), Config.TARGET_DIR + DARKNET_CONFIG_DIR + "/voc.names");
             createDataFile(classNames);
             createDataSet("train.txt", Config.DATA_SET_SIZE);
             createDataSet("val.txt", Config.VAL_SET_SIZE);
@@ -54,24 +62,24 @@ public class AnnotationGenerator {
         sb.append(classNames.size());
         sb.append(System.getProperty("line.separator"));
         sb.append("train = ");
-        sb.append(new File(formatPath(Config.TARGET_DIR) + "/train.txt").getAbsolutePath());
+        sb.append(new File(formatPath(Config.TARGET_DIR + DARKNET_CONFIG_DIR) + "/train.txt").getAbsolutePath());
         sb.append(System.getProperty("line.separator"));
         sb.append("valid = ");
-        sb.append(new File(formatPath(Config.TARGET_DIR) + "/val.txt").getAbsolutePath());
+        sb.append(new File(formatPath(Config.TARGET_DIR + DARKNET_CONFIG_DIR) + "/val.txt").getAbsolutePath());
         sb.append(System.getProperty("line.separator"));
         sb.append("names = data/voc.names");
         sb.append(System.getProperty("line.separator"));
         sb.append("backup = backup");
-        writeToFile(sb.toString(), Config.TARGET_DIR + "/voc.data");
+        writeToFile(sb.toString(), Config.TARGET_DIR + DARKNET_CONFIG_DIR + "/voc.data");
     }
 
     private void createDataSet(final String name, final Integer size) {
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<size; i++) {
-            sb.append(new File(formatPath(Config.TARGET_DIR) + "/Images/" + i + ".jpg").getAbsolutePath());
+            sb.append(new File(formatPath(Config.TARGET_DIR) + DATASET_DIR + IMAGES_DIR + i + ".jpg").getAbsolutePath());
             sb.append(System.getProperty("line.separator"));
         }
-        writeToFile(sb.toString(), Config.TARGET_DIR + "/" + name);
+        writeToFile(sb.toString(), Config.TARGET_DIR + DARKNET_CONFIG_DIR + "/" + name);
     }
 
     private String formatPath(final String path) {
@@ -92,12 +100,12 @@ public class AnnotationGenerator {
             }
             sb.append(System.getProperty("line.separator"));
         }
-        writeToFile(sb.toString(), Config.TARGET_DIR + "/labels/" + fileName + ".txt");
+        writeToFile(sb.toString(), Config.TARGET_DIR + DATASET_DIR + DARKNET_LABELS + fileName + ".txt");
     }
 
     private void saveInVocFormat(final List<BoundingBox> boxes, final String fileName) {
         Map<String, String> context = new HashMap();
-        context.put("folder", "../Images");
+        context.put("folder", ".." + IMAGES_DIR);
         context.put("fileName", fileName + ".jpg");
         context.put("width", Config.IMAGE_WIDTH + "");
         context.put("height", Config.IMAGE_HEIGHT + "");
@@ -105,7 +113,7 @@ public class AnnotationGenerator {
 
         try {
             String template = Resources.toString(Resources.getResource("annotation-template.xml"), Charsets.UTF_8);
-            writeToFile(jinjava.render(template, context), Config.TARGET_DIR + "/Annotations/" + fileName + ".xml");
+            writeToFile(jinjava.render(template, context), Config.TARGET_DIR + DATASET_DIR + ANNOTATIONS_DIR + fileName + ".xml");
         } catch (IOException ex) {
             LOG.error("Unable to save annotation xml!");
         }
