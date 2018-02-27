@@ -49,7 +49,7 @@ public class Generator {
         createDirIfNotExists(new File(Config.TARGET_DIR + "/Annotations"));
 
         if (Config.DARKNET) {
-            createDirIfNotExists(new File(Config.TARGET_DIR + "/Annotations/labels"));
+            createDirIfNotExists(new File(Config.TARGET_DIR + "/labels"));
         }
     }
 

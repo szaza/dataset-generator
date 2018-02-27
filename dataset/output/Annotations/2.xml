@@ -8,100 +8,100 @@
         <height>416</height>
     </size>
     <object>
-    <name>one-purple-filled-oval</name>
-    <bndbox>
-        <xmin>60</xmin>
-        <ymin>10</ymin>
-        <xmax>141</xmax>
-        <ymax>114</ymax>
-    </bndbox>
-</object><object>
-    <name>one-purple-filled-oval</name>
-    <bndbox>
-        <xmin>161</xmin>
-        <ymin>10</ymin>
-        <xmax>250</xmax>
-        <ymax>120</ymax>
-    </bndbox>
-</object><object>
     <name>one-purple-blank-corissant</name>
     <bndbox>
-        <xmin>262</xmin>
+        <xmin>60</xmin>
         <ymin>10</ymin>
-        <xmax>350</xmax>
-        <ymax>122</ymax>
-    </bndbox>
-</object><object>
-    <name>one-purple-filled-croissant</name>
-    <bndbox>
-        <xmin>60</xmin>
-        <ymin>111</ymin>
-        <xmax>146</xmax>
-        <ymax>221</ymax>
-    </bndbox>
-</object><object>
-    <name>one-purple-filled-diamond</name>
-    <bndbox>
-        <xmin>161</xmin>
-        <ymin>111</ymin>
-        <xmax>228</xmax>
-        <ymax>205</ymax>
-    </bndbox>
-</object><object>
-    <name>one-green-filled-oval</name>
-    <bndbox>
-        <xmin>262</xmin>
-        <ymin>111</ymin>
-        <xmax>340</xmax>
-        <ymax>213</ymax>
-    </bndbox>
-</object><object>
-    <name>one-green-blank-diamond</name>
-    <bndbox>
-        <xmin>60</xmin>
-        <ymin>212</ymin>
-        <xmax>133</xmax>
-        <ymax>311</ymax>
+        <xmax>138</xmax>
+        <ymax>114</ymax>
     </bndbox>
 </object><object>
     <name>one-green-striped-croissant</name>
     <bndbox>
         <xmin>161</xmin>
-        <ymin>212</ymin>
-        <xmax>248</xmax>
-        <ymax>322</ymax>
+        <ymin>10</ymin>
+        <xmax>229</xmax>
+        <ymax>104</ymax>
     </bndbox>
 </object><object>
     <name>one-green-striped-oval</name>
     <bndbox>
         <xmin>262</xmin>
-        <ymin>212</ymin>
-        <xmax>339</xmax>
-        <ymax>316</ymax>
+        <ymin>10</ymin>
+        <xmax>338</xmax>
+        <ymax>112</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-filled-oval</name>
+    <name>one-purple-blank-diamond</name>
     <bndbox>
         <xmin>60</xmin>
-        <ymin>313</ymin>
-        <xmax>141</xmax>
-        <ymax>417</ymax>
+        <ymin>111</ymin>
+        <xmax>132</xmax>
+        <ymax>208</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-blank-corissant</name>
+    <bndbox>
+        <xmin>161</xmin>
+        <ymin>111</ymin>
+        <xmax>245</xmax>
+        <ymax>219</ymax>
+    </bndbox>
+</object><object>
+    <name>one-green-blank-diamond</name>
+    <bndbox>
+        <xmin>262</xmin>
+        <ymin>111</ymin>
+        <xmax>355</xmax>
+        <ymax>226</ymax>
     </bndbox>
 </object><object>
     <name>one-green-filled-oval</name>
     <bndbox>
-        <xmin>161</xmin>
-        <ymin>313</ymin>
-        <xmax>230</xmax>
-        <ymax>409</ymax>
+        <xmin>60</xmin>
+        <ymin>212</ymin>
+        <xmax>136</xmax>
+        <ymax>313</ymax>
     </bndbox>
 </object><object>
-    <name>one-purple-blank-oval</name>
+    <name>one-purple-filled-oval</name>
+    <bndbox>
+        <xmin>161</xmin>
+        <ymin>212</ymin>
+        <xmax>250</xmax>
+        <ymax>322</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-filled-croissant</name>
+    <bndbox>
+        <xmin>262</xmin>
+        <ymin>212</ymin>
+        <xmax>348</xmax>
+        <ymax>322</ymax>
+    </bndbox>
+</object><object>
+    <name>one-green-striped-oval</name>
+    <bndbox>
+        <xmin>60</xmin>
+        <ymin>313</ymin>
+        <xmax>131</xmax>
+        <ymax>412</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-filled-diamond</name>
+    <bndbox>
+        <xmin>161</xmin>
+        <ymin>313</ymin>
+        <xmax>247</xmax>
+        <ymax>423</ymax>
+    </bndbox>
+</object><object>
+    <name>one-purple-filled-oval</name>
     <bndbox>
         <xmin>262</xmin>
         <ymin>313</ymin>
-        <xmax>354</xmax>
-        <ymax>426</ymax>
+        <xmax>349</xmax>
+        <ymax>421</ymax>
     </bndbox>
 </object>
 </annotation>

@@ -59,7 +59,7 @@ public class AnnotationGenerator {
         sb.append("valid = ");
         sb.append(new File(formatPath(Config.TARGET_DIR) + "/val.txt").getAbsolutePath());
         sb.append(System.getProperty("line.separator"));
-        sb.append("names = date/voc.names");
+        sb.append("names = data/voc.names");
         sb.append(System.getProperty("line.separator"));
         sb.append("backup = backup");
         writeToFile(sb.toString(), Config.TARGET_DIR + "/voc.data");
@@ -92,7 +92,7 @@ public class AnnotationGenerator {
             }
             sb.append(System.getProperty("line.separator"));
         }
-        writeToFile(sb.toString(), Config.TARGET_DIR + "/Annotations/labels/" + fileName + ".txt");
+        writeToFile(sb.toString(), Config.TARGET_DIR + "/labels/" + fileName + ".txt");
     }
 
     private void saveInVocFormat(final List<BoundingBox> boxes, final String fileName) {
