@@ -47,15 +47,15 @@ public class ImageUtil {
         }
     }
 
-    public static BufferedImage cloneImage(final BufferedImage background) {
-        BufferedImage clone = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
+    public static BufferedImage cloneImage(final BufferedImage imageToClone) {
+        BufferedImage clone = new BufferedImage(imageToClone.getWidth(), imageToClone.getHeight(), imageToClone.getType());
         Graphics2D cloneGraphics = (Graphics2D) clone.getGraphics();
 
         if (Config.BLUR) {
             cloneGraphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         }
 
-        cloneGraphics.drawImage(background, 0, 0, null);
+        cloneGraphics.drawImage(imageToClone, 0, 0, null);
         cloneGraphics.dispose();
         return clone;
     }
