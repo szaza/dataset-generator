@@ -69,7 +69,7 @@ public class CardGenerator {
 
                 int angle = random.nextInt(2 * MAX_ANGLE_TO_ROTATE) - MAX_ANGLE_TO_ROTATE;
                 int cardIndex = cardIndexes.get(index);
-                BufferedImage rotatedCard = rotateCard(ImageUtil.cloneImage(images.get(cardIndex)), Math.toRadians(angle));
+                BufferedImage rotatedCard = rotateCard(ImageUtil.cloneImage(images.get(cardIndex), true), Math.toRadians(angle));
 
                 int posX = baseOffsetX + x * offset;
                 int posY = baseOffsetY + y * offset;
@@ -106,7 +106,7 @@ public class CardGenerator {
     private void showBoundingBoxes(final Graphics2D graphics, final BoundingBox bBox, int index) {
         graphics.setColor(Color.GREEN);
         graphics.drawRect(bBox.getxMin(), bBox.getyMin(), bBox.getxMax() - bBox.getxMin(), bBox.getyMax() - bBox.getyMin());
-        graphics.drawString(classNames.get(index), bBox.getxMin(), bBox.getyMin() - 5);
+        graphics.drawString(bBox.getClassName(), bBox.getxMin(), bBox.getyMin() - 5);
     }
 
     private BufferedImage rotateCard(final BufferedImage card, final Double angle) {
@@ -165,7 +165,14 @@ public class CardGenerator {
     }
 
     private String getClassName(final String fileName) {
-        return fileName.substring(0, fileName.indexOf('.'));
+        String withoutExtension = fileName.substring(0, fileName.indexOf('.'));
+        for (String classLabel : Config.CLASS_LABELS) {
+            if (withoutExtension.startsWith(classLabel)) {
+                return classLabel;
+            }
+        }
+
+        return withoutExtension;
     }
 
     private float calcCardSize() {

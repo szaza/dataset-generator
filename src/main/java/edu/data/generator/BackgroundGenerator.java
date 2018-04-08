@@ -33,7 +33,7 @@ public class BackgroundGenerator {
         if (!initialized) {
             init();
         }
-        return ImageUtil.cloneImage(backgrounds.get(random.nextInt(backgrounds.size())));
+        return ImageUtil.cloneImage(backgrounds.get(random.nextInt(backgrounds.size())), false);
     }
 
     private void readBackgrounds() {

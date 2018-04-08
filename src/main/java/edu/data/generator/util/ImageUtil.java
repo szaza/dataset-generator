@@ -16,7 +16,7 @@ public class ImageUtil {
     private final static Logger LOG = LoggerFactory.getLogger(ImageUtil.class);
 
     public static BufferedImage progressiveScaleImage(final BufferedImage originalImage, final Integer width, final Integer height) {
-        BufferedImage resizedImage = cloneImage(originalImage);
+        BufferedImage resizedImage = cloneImage(originalImage, true);
         int newWidth = (int) ((double) originalImage.getWidth() * proportion);
         int newHeight = (int) ((double) originalImage.getHeight() * proportion);
 
@@ -41,14 +41,15 @@ public class ImageUtil {
 
     public static void saveImage(final BufferedImage image, final String target) {
         try {
-            ImageIO.write(image,"jpg", new File(target));
+            ImageIO.write(cloneImage(image, false),"jpg", new File(target));
         } catch (IOException e) {
             LOG.error("Unagle to save image {}!", target);
         }
     }
 
-    public static BufferedImage cloneImage(final BufferedImage imageToClone) {
-        BufferedImage clone = new BufferedImage(imageToClone.getWidth(), imageToClone.getHeight(), imageToClone.getType());
+    public static BufferedImage cloneImage(final BufferedImage imageToClone, final boolean alpha) {
+        BufferedImage clone = (alpha) ? new BufferedImage(imageToClone.getWidth(), imageToClone.getHeight(), BufferedImage.TYPE_INT_ARGB):
+                new BufferedImage(imageToClone.getWidth(), imageToClone.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D cloneGraphics = (Graphics2D) clone.getGraphics();
 
         if (Config.BLUR) {

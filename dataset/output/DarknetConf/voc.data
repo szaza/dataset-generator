@@ -1,4 +1,4 @@
-classes = 14
+classes = 10
 train = /home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/DarknetConf/train.txt
 valid = /home/ubbcluj/Documents/Egyetem/FinalExam/DataSet/dataset-generator/dataset/output/DarknetConf/val.txt
 names = data/voc.names
