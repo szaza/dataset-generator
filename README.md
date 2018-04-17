@@ -13,7 +13,7 @@ The current solution makes possible to generate similar learning data with annot
 
 You can find below some generated data:
 
-<img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/VOCDataSet/JPEGImages/0.jpg" alt="Generated playground" title="Generated playground" width="300"> <img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/VOCDataSet/JPEGImages/1.jpg" alt="Generated playground2" title="Generated playground2" width="300">
+<img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/VOCDataSet/JPEGImages/card-0.jpg" alt="Generated playground" title="Generated playground" width="300"> <img src="https://github.com/szaza/dataset-generator/blob/master/dataset/output/VOCDataSet/JPEGImages/card-1.jpg" alt="Generated playground2" title="Generated playground2" width="300">
 
 ### Configuration
 There are some configuration possibilities. Unfortunately, I didn't create any property file for these, so you have to set the parameters in the `Configuration.java` interface.
