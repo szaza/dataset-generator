@@ -37,10 +37,10 @@ public class Generator {
             BufferedImage image = backgroundGenerator.getRandomBackground();
             GeneratedData data = cardGenerator.putCardsToBackground(image);
             ImageUtil.saveImage(data.getImage(), Config.TARGET_DIR + DATASET_DIR + IMAGES_DIR + i + ".jpg");
-            annotationGenerator.saveAnnotation(cardGenerator.getClassNames(), data.getBoxes(), i + "");
+            annotationGenerator.saveAnnotation(Config.CLASS_LABELS, data.getBoxes(), i + "");
         }
 
-        annotationGenerator.generateLabels(cardGenerator.getClassNames());
+        annotationGenerator.generateLabels(Config.CLASS_LABELS);
 
         LOG.info("Image generation process has finished.");
     }

@@ -13,10 +13,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static edu.data.generator.config.Config.ANNOTATIONS_DIR;
 import static edu.data.generator.config.Config.DARKNET_CONFIG_DIR;
@@ -34,20 +32,17 @@ public class AnnotationGenerator {
         jinjava = new Jinjava();
     }
 
-    public void saveAnnotation(final List<String> classNames, final List<BoundingBox> boxes, final String fileName) {
+    public void saveAnnotation(final String[] classNames, final List<BoundingBox> boxes, final String fileName) {
         saveInVocFormat(boxes, fileName);
         if (Config.DARKNET) {
             saveInDarknetFormat(classNames, boxes, fileName);
         }
     }
 
-    public void generateLabels(final List<String> classNames) {
+    public void generateLabels(final String[] classNames) {
         StringBuilder stringBuilder = new StringBuilder();
-        Set<String> uniqueClassNames = new HashSet();
 
-        classNames.forEach((className) -> uniqueClassNames.add(className));
-
-        for (String className : uniqueClassNames) {
+        for (String className : classNames) {
             stringBuilder.append(className);
             stringBuilder.append(System.getProperty("line.separator"));
         }
@@ -62,10 +57,10 @@ public class AnnotationGenerator {
         }
     }
 
-    private void createDataFile(final List<String> classNames) {
+    private void createDataFile(final String[] classNames) {
         StringBuilder sb = new StringBuilder();
         sb.append("classes = ");
-        sb.append(classNames.size());
+        sb.append(classNames.length);
         sb.append(System.getProperty("line.separator"));
         sb.append("train = ");
         sb.append(new File(formatPath(Config.TARGET_DIR + DARKNET_CONFIG_DIR) + "/train.txt").getAbsolutePath());
@@ -92,7 +87,7 @@ public class AnnotationGenerator {
         return path.substring(2, path.length());
     }
 
-    private void saveInDarknetFormat(final List<String> classNames, final List<BoundingBox> boxes, final String fileName) {
+    private void saveInDarknetFormat(final String[] classNames, final List<BoundingBox> boxes, final String fileName) {
         Map<String, Integer> map = getClassNamesMap(classNames);
 
         StringBuilder sb = new StringBuilder();
@@ -146,10 +141,10 @@ public class AnnotationGenerator {
         return objects;
     }
 
-    private Map<String, Integer> getClassNamesMap(final List<String> classNames) {
+    private Map<String, Integer> getClassNamesMap(final String[] classNames) {
         Map<String, Integer> map = new HashMap();
-        for (int i=0; i < classNames.size(); i++) {
-            map.put(classNames.get(i), i);
+        for (int i=0; i < classNames.length; i++) {
+            map.put(classNames[i], i);
         }
         return map;
     }
